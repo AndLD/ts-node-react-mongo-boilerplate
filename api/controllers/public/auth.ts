@@ -49,7 +49,7 @@ async function postLogin(req: any, res: Response) {
         entity: 'USERS',
         action: 'SIGNIN',
         createdAt: Date.now(),
-        clusterId: null,
+        relativeId: null,
         targetId: userState._id,
         userId: userState._id,
         payload: userState

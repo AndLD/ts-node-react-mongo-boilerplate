@@ -10,13 +10,11 @@ import useLayoutContext from '../hooks/pages/layout'
 import { inactiveRoutes } from '../routes/inactive.tsx'
 import { isMobile } from 'react-device-detect'
 import { authorizedContext } from '../context'
-import useClustersContextValue from '../hooks/pages/authorized.ts'
+import useAuthorizedContextValue from '../hooks/pages/authorized.ts'
 import { IUserState } from '@lib/utils/interfaces/user.ts'
 
 export default function AppRoutes() {
     const token = useToken()
-
-    const [lastOpenedCluster] = useState<string | null>(localStorage.getItem('lastOpenedCluster'))
 
     const [routes, setRoutes] = useState<RouteObject[]>([])
     const [redirectRoute, setRedirectRoute] = useState<string | null>(null)
@@ -30,15 +28,11 @@ export default function AppRoutes() {
                 setRedirectRoute('/forbidden')
             } else if (user.status === 'owner' || user.status === 'admin') {
                 setRoutes(privateRoutes)
-                setRedirectRoute(isMobile ? '/clusters' : '/admin')
+                setRedirectRoute(isMobile ? '/authorized' : '/admin')
             } else if (user.status === 'user' || user.status === 'unlimited') {
                 setRoutes(privateRoutes)
 
-                if (lastOpenedCluster) {
-                    setRedirectRoute(`/clusters/${lastOpenedCluster}`)
-                } else {
-                    setRedirectRoute('/clusters')
-                }
+                setRedirectRoute('/authorized')
             } else {
                 // setRoutes([{ path: '/forbidden', element: <Forbidden /> }])
                 // setRedirectRoute('/forbidden')
@@ -62,7 +56,7 @@ export default function AppRoutes() {
     )
 
     return (
-        <authorizedContext.Provider value={useClustersContextValue()}>
+        <authorizedContext.Provider value={useAuthorizedContextValue()}>
             <layoutContext.Provider value={useLayoutContext()}>{routing}</layoutContext.Provider>
         </authorizedContext.Provider>
     )

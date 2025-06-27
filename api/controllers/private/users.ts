@@ -17,7 +17,7 @@ async function get(req: AuthorizedRequest, res: Response, next: NextFunction) {
         const skip = (pagination.page - 1) * pagination.results
         const limit = pagination.results
 
-        const users = await usersService.getUsersWithTotalNodesPerCluster(clientFilter, skip, limit)
+        const users = await usersService.getUsers(clientFilter, skip, limit)
 
         const total = await db.collection(collectionName).countDocuments(clientFilter)
 
@@ -50,7 +50,7 @@ async function put(req: AuthorizedRequest, res: Response, next: NextFunction) {
             entity: 'USERS',
             action: 'UPDATE',
             createdAt: Date.now(),
-            clusterId: null,
+            relativeId: null,
             targetId: id,
             userId,
             payload: data

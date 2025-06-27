@@ -6,7 +6,7 @@ export type LogAction = 'CREATE' | 'UPDATE' | 'DELETE' | 'SIGNIN'
 export interface ILogBody {
     entity: LogEntity
     action: LogAction
-    clusterId: string | null
+    relativeId: string | null
     targetId: string
     userId: string
     payload?: Record<string, any>
