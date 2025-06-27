@@ -1,7 +1,7 @@
 {
     "apps": [
         {
-            "name": "your-graph-api",
+            "name": "app-api",
             "script": "npm",
             "args": ["run", "prod"],
             "cwd": "./api",
@@ -14,7 +14,7 @@
             }
         },
         {
-            "name": "your-graph-client",
+            "name": "app-client",
             "script": "npm",
             "args": ["run", "prod"],
             "cwd": "./client",
@@ -27,7 +27,7 @@
             }
         },
         {
-            "name": "your-graph-ssr",
+            "name": "app-ssr",
             "script": "npm",
             "args": ["run", "start"],
             "cwd": "./ssr",

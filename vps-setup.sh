@@ -20,8 +20,8 @@ sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common
 sudo rm -rf /etc/apache2
 sudo apt remove apache2*
 
-git clone https://github.com/AndLD/your-graph.git
-cd your-graph
+git clone your-repo-url.git
+cd your-repo-name
 
 # probably it is required to copy api/public/images folder
 

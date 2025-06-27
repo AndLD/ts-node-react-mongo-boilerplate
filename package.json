@@ -1,4 +1,10 @@
 {
+    "name": "ts-node-react-mongo-boilerplate",
+    "version": "1.0.0",
+    "description": "TS-NODE-REACT-MONGO-BOILERPLATE",
+    "bin": {
+        "ts-node-react-mongo-boilerplate": "bin/create-app.js"
+    },
     "scripts": {
         "format": "prettier --config .prettierrc.json --write ."
     },
