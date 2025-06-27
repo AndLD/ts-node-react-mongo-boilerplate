@@ -13,17 +13,29 @@ if (!destination) {
 
 fs.copy(source, destination, {
     filter: (src) => {
-        const filesToExclude = ['node_modules', 'bin', '.git', 'package.json', 'package-lock.json', 'root.package.json']
+        const filesToExcludeGlobally = ['node_modules', 'bin', '.git', 'ts-node-react-mongo-boilerplate-1.0.4.tgz', 'root.package.json']
+        const rootLevelFilesToExclude = ['package.json', 'package-lock.json']
+
         const relativePath = path.relative(source, src)
+
         if (relativePath === '') {
             return true
         }
+
         const pathSegments = relativePath.split(path.sep)
-        const shouldExclude = pathSegments.some((segment) => filesToExclude.includes(segment))
-        if (shouldExclude) {
-            // console.log(`Excluding ${relativePath}`);
+
+        // Check for global exclusions (like node_modules, .git, etc.)
+        const shouldExcludeGlobally = pathSegments.some(segment => filesToExcludeGlobally.includes(segment))
+        if (shouldExcludeGlobally) {
+            return false
         }
-        return !shouldExclude
+
+        // Check for root-level exclusions (package.json, package-lock.json)
+        if (pathSegments.length === 1 && rootLevelFilesToExclude.includes(pathSegments[0])) {
+            return false
+        }
+
+        return true
     }
 })
     .then(() => {
