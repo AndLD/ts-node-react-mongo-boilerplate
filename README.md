@@ -14,6 +14,7 @@ This is a full-stack boilerplate project using TypeScript, Node.js, React, and M
 To create a new project using this boilerplate, run the following command:
 
 ```bash
+npx i -g ts-node-react-mongo-boilerplate
 npx ts-node-react-mongo-boilerplate your-project-name
 ```
 
