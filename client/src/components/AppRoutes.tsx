@@ -9,7 +9,7 @@ import { layoutContext } from '../context'
 import useLayoutContext from '../hooks/pages/layout'
 import { inactiveRoutes } from '../routes/inactive.tsx'
 import { isMobile } from 'react-device-detect'
-import { clustersContext } from '../context'
+import { authorizedContext } from '../context'
 import useClustersContextValue from '../hooks/pages/authorized.ts'
 import { IUserState } from '@lib/utils/interfaces/user.ts'
 
@@ -62,8 +62,8 @@ export default function AppRoutes() {
     )
 
     return (
-        <clustersContext.Provider value={useClustersContextValue()}>
+        <authorizedContext.Provider value={useClustersContextValue()}>
             <layoutContext.Provider value={useLayoutContext()}>{routing}</layoutContext.Provider>
-        </clustersContext.Provider>
+        </authorizedContext.Provider>
     )
 }
