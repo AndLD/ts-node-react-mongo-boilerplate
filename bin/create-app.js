@@ -13,7 +13,7 @@ if (!destination) {
 
 fs.copy(source, destination, {
     filter: (src) => {
-        const filesToExclude = ['node_modules', 'package-lock.json', 'bin']
+        const filesToExclude = ['node_modules', 'bin']
         return !filesToExclude.some((file) => src.includes(file))
     }
 })
@@ -21,5 +21,5 @@ fs.copy(source, destination, {
         console.log('Project created successfully!')
     })
     .catch((err) => {
-        console.error(err)
+        console.error(`Error copying project: ${err}`)
     })
