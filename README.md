@@ -20,7 +20,7 @@ npx ts-node-react-mongo-boilerplate your-project-name
 
 ## Development
 
-To run the applications in development mode, navigate to the respective directories (`api`, `client`, `ssr`) and run:
+To run the applications in development mode, navigate to the respective directories (first in project root, `api`, `client`, `ssr`) and run:
 
 ```bash
 npm i
