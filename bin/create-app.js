@@ -13,8 +13,8 @@ if (!destination) {
 
 fs.copy(source, destination, {
     filter: (src) => {
-        const filesToExcludeGlobally = ['node_modules', 'bin', '.git', 'ts-node-react-mongo-boilerplate-1.0.4.tgz', 'root.package.json']
-        const rootLevelFilesToExclude = ['package.json', 'package-lock.json']
+        const filesToExcludeGlobally = ['node_modules', 'bin', '.git']
+        const rootLevelFilesToExclude = ['package.json', 'package-lock.json', 'root.package.json', 'gitignore']
 
         const relativePath = path.relative(source, src)
 
@@ -25,7 +25,7 @@ fs.copy(source, destination, {
         const pathSegments = relativePath.split(path.sep)
 
         // Check for global exclusions (like node_modules, .git, etc.)
-        const shouldExcludeGlobally = pathSegments.some(segment => filesToExcludeGlobally.includes(segment))
+        const shouldExcludeGlobally = pathSegments.some((segment) => filesToExcludeGlobally.includes(segment))
         if (shouldExcludeGlobally) {
             return false
         }
@@ -38,6 +38,12 @@ fs.copy(source, destination, {
         return true
     }
 })
+    .then(() => {
+        // Explicitly copy .gitignore as it's often excluded by default in npm packages
+        const gitignoreSource = path.join(source, 'gitignore')
+        const gitignoreDestination = path.join(destination, '.gitignore')
+        return fs.copy(gitignoreSource, gitignoreDestination)
+    })
     .then(() => {
         const rootPackageJsonSource = path.join(source, 'root.package.json')
         const packageJsonDestination = path.join(destination, 'package.json')
