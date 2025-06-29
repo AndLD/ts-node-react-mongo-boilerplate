@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import { isProduction } from './constants'
 
 export const Utils = {
@@ -6,43 +5,6 @@ export const Utils = {
         // получить случайное число от (min-0.5) до (max+0.5)
         const rand = min - 0.5 + Math.random() * (max - min + 1)
         return Math.round(rand)
-    },
-    // @ts-ignore
-    getNodeLabel(node: INode, category?: ICategory) {
-        if (!node.payload) {
-            return null
-        }
-
-        // TODO Andrii Larionov: Remove
-        // const titleKey = category?.fields?.find(
-        //     (field) => field.type === 'title'
-        // )?.name
-
-        let title = node.payload.title
-
-        if (title.length > 20) {
-            title = title
-                .split(' ')
-                .map((word, i) => {
-                    if (i % 3 === 0 && i > 0) {
-                        return word + '\n'
-                    }
-
-                    return word
-                })
-                .join(' ')
-        }
-
-        return (
-            node.payload.title +
-            (node.payload.startDate
-                ? '\n' +
-                  dayjs(node.payload.startDate, 'DD.MM.YYYY').format('DD.MM.YYYY').toString() +
-                  (node.payload.endDate
-                      ? ' - ' + dayjs(node.payload.endDate, 'DD.MM.YYYY').format('DD.MM.YYYY').toString()
-                      : '')
-                : '')
-        )
     },
     renameIdKeyForItems(items: any[]) {
         return items.map(({ _id, ...rest }) => ({
