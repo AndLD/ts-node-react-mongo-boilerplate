@@ -61,3 +61,6 @@ npm run dev
 ## Production
 
 The `vps-setup.sh` script provides instructions for setting up a VPS for production. It includes steps for installing dependencies, configuring Nginx, and setting up SSL with Certbot. The `ecosystem.config.json` file is used by PM2 to manage the applications in a production environment.
+
+**See detailed documentation with Deepwiki:**
+https://deepwiki.com/AndLD/ts-node-react-mongo-boilerplate
